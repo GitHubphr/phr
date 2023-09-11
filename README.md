@@ -1,27 +1,41 @@
-# python
-1
-from sympy import*
-import numpy as np
-import matplotlib . pyplot as plt
-x , y= symbols ('x,y')
-sol = solve ([2*x+y-7 , 3*x-y-3],[x , y])
-p=sol[x]
-q=sol[y]
-print ('Point of intersection is A (', p ,',', q , ')\n' )
-x = np . arange (-10 , 10 , 0.001 )
-y1 = 7-2*x
-y2=3*x-3
-plt . plot (x , y1 ,'r')
-plt . plot (x , y2 ,'g')
-plt . plot (p ,q , marker = '*')
-plt . annotate ('A', xy=(p , q ) , xytext =( p+0.5 , q ) )
-plt . xlim (-10 , 10 )
-plt . ylim (-10 , 10 )
-plt . axhline ( y=0 )
-plt . axvline ( x=0 )
-plt . title ("$2x+y=7; 3x -y=3$")
-plt . xlabel (" Values of x")
-plt . ylabel (" Values of y ")
-plt . legend (['$2x+y=7$ ', '$3x -y-3$ '])
-plt . grid ()
-plt . show ()
+#include<iostream>
+#include<fstream>
+using namespace std;
+int main()
+{
+ofstream file;
+file.open("msg.bin",ios::binary);
+if(!file)
+{
+cout<<"error";
+}
+int h,m,s;
+char c=':';
+cin>>h;
+cin>>m;
+cin>>s;
+file.write((char*)&h,sizeof(h));
+file.write((char*)&c,sizeof(c));
+file.write((char*)&m,sizeof(m));
+file.write((char*)&c,sizeof(c));
+file.write((char*)&s,sizeof(s));
+file.close();
+ifstream file1;
+file1.open("msg.bin",ios::binary);
+if(!file)
+{
+cout<<"error";
+return 0;
+}
+int h1,m1,s1;
+char c1,c2;
+file1.read((char*)&h1,sizeof (h1));
+file1.read((char*)&c1,sizeof (c1));
+file1.read((char*)&m1,sizeof (m1));
+file1.read((char*)&c2,sizeof (c2));
+file1.read((char*)&s1,sizeof (s1));
+file1.close();
+cout<<"time read\n";
+cout<<h1<<c1<<m1<<c2<<s1;
+return 0;
+}
